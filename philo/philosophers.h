@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: teambersaw <teambersaw@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:00:15 by teambersaw        #+#    #+#             */
-/*   Updated: 2022/04/01 15:58:07 by teambersaw       ###   ########.fr       */
+/*   Updated: 2022/04/04 15:41:32 by jrossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,10 @@ typedef struct s_args
 	int	t_sleep;
 	int	nb_eat;
 }	t_args;
+
+typedef struct s_philo
+{
+	pthread_t	*thread;
+}	t_philo;
 
 #endif
