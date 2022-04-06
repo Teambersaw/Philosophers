@@ -6,7 +6,7 @@
 /*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:00:15 by teambersaw        #+#    #+#             */
-/*   Updated: 2022/04/05 15:20:16 by jrossett         ###   ########.fr       */
+/*   Updated: 2022/04/06 16:06:34 by jrossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,23 @@ typedef struct s_args
 
 typedef struct s_philo
 {
-	pthread_t		*thread;
+	pthread_t	thread;
+	int			last_eat;
+	int			index;
+	int			t_eat;
+}	t_philo;
+
+typedef struct s_data
+{
 	pthread_mutex_t	*fork;
+	t_philo			philo;
 	t_args			args;
 	pthread_mutex_t	eat;
 	pthread_mutex_t	sleep;
 	pthread_mutex_t	think;
-}	t_philo;
+}	t_data;
 
-int	ft_init_thread(t_args args);
+int		ft_init_thread(t_args args);
+void	*ph(void *ptr);
 
 #endif

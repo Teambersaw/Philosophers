@@ -6,7 +6,7 @@
 /*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:04:07 by teambersaw        #+#    #+#             */
-/*   Updated: 2022/04/05 15:22:51 by jrossett         ###   ########.fr       */
+/*   Updated: 2022/04/06 11:42:19 by jrossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,6 @@ int	main(int ac, char **av)
 	if (av[1] == 0)
 		return (printf("We need at least one philosopher"), 1);
 	if (ft_init_thread(args))
-		return (printf("Error\n"), 1);
+		return (printf("Error occured\n"), 1);
 	return (0);
 }
