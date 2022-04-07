@@ -6,7 +6,7 @@
 /*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:04:07 by teambersaw        #+#    #+#             */
-/*   Updated: 2022/04/06 11:42:19 by jrossett         ###   ########.fr       */
+/*   Updated: 2022/04/07 11:41:07 by jrossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ int	main(int ac, char **av)
 		return (printf("Wrong argument\n"), 1);
 	if (ac == 6 && args.nb_eat == 0)
 		return (printf("All philosophers have eaten 0 times\n"), 0);
-	if (av[1] == 0)
-		return (printf("We need at least one philosopher"), 1);
+	if (args.nb_philo == 0)
+		return (printf("We need at least one philosopher\n"), 1);
 	if (ft_init_thread(args))
 		return (printf("Error occured\n"), 1);
 	return (0);
