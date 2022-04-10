@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: teambersaw <teambersaw@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:04:07 by teambersaw        #+#    #+#             */
-/*   Updated: 2022/04/07 11:41:07 by jrossett         ###   ########.fr       */
+/*   Updated: 2022/04/08 12:08:57 by teambersaw       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,10 @@ int	main(int ac, char **av)
 
 	if ((ac != 5 && ac != 6) || ft_args_check(ac, av))
 		return (printf("Wrong argument\n"), 1);
-	if (ft_init_args(&args, ac, av))
+	if (ft_init_args(&args, ac, av) || args.nb_philo <= 0)
 		return (printf("Wrong argument\n"), 1);
 	if (ac == 6 && args.nb_eat == 0)
 		return (printf("All philosophers have eaten 0 times\n"), 0);
-	if (args.nb_philo == 0)
-		return (printf("We need at least one philosopher\n"), 1);
 	if (ft_init_thread(args))
 		return (printf("Error occured\n"), 1);
 	return (0);

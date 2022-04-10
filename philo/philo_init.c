@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: teambersaw <teambersaw@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:13:24 by teambersaw        #+#    #+#             */
-/*   Updated: 2022/04/07 15:03:29 by jrossett         ###   ########.fr       */
+/*   Updated: 2022/04/09 15:31:10 by teambersaw       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ pthread_mutex_t	*ft_init_fork(int nb_philo)
 void	ft_init_philo(t_philo *philo, int i, t_data *data)
 {
 	philo->index = i;
-	philo->t_eat = 0;
-	philo->last_eat = 0;
+	philo->last_meal = data->day_t;
 	philo->data = data;
+	philo->nb_meal = 0;
 }
 
 int	ft_init_data(t_args args, t_data *data)
@@ -45,6 +45,8 @@ int	ft_init_data(t_args args, t_data *data)
 	int	i;
 
 	i = -1;
+	data->day_t = ft_time();
+	data->dead = 0;
 	data->philo = malloc(sizeof(t_philo) * args.nb_philo);
 	if (!data->philo)
 		return (1);
@@ -56,7 +58,7 @@ int	ft_init_data(t_args args, t_data *data)
 		ft_init_philo(&data->philo[i], i, data);
 	if (pthread_mutex_init(&data->sleep, NULL)
 		|| pthread_mutex_init(&data->print, NULL)
-		||pthread_mutex_init(&data->think, NULL))
+		||pthread_mutex_init(&data->eat, NULL))
 		return (ft_free(*data), 1);
 	return (0);
 }
@@ -74,6 +76,8 @@ int	ft_init_thread(t_args args)
 		if (pthread_create(&data.philo[i].thread, NULL, &philo, &data.philo[i]))
 			return (ft_free(data), 1);
 	}
+	//i = -1;
+	//ft_check_dead(data.philo, args.nb_philo);
 	i = -1;
 	while (++i < args.nb_philo)
 		if (pthread_join(data.philo[i].thread, NULL))
@@ -84,7 +88,7 @@ int	ft_init_thread(t_args args)
 			return (ft_free(data), 1);
 	if (pthread_mutex_destroy(&data.print)
 		|| pthread_mutex_destroy(&data.sleep)
-		|| pthread_mutex_destroy(&data.think))
+		|| pthread_mutex_destroy(&data.eat))
 		return (ft_free(data), 1);
 	ft_free(data);
 	free(data.philo);
