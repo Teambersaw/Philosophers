@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: teambersaw <teambersaw@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:04:07 by teambersaw        #+#    #+#             */
-/*   Updated: 2022/04/08 12:08:57 by teambersaw       ###   ########.fr       */
+/*   Updated: 2022/04/11 17:00:33 by jrossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	ft_init_args(t_args *args, int ac, char **av)
 	if (ac == 6)
 		args->nb_eat = ft_atoi(av[5]);
 	else
-		args->nb_eat = -2;
+		args->nb_eat = -17;
 	if (args->nb_eat == -1 || args->t_sleep == -1 || args->t_eat == -1
 		|| args->t_die == -1 || args->nb_philo == -1)
 		return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: teambersaw <teambersaw@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:00:15 by teambersaw        #+#    #+#             */
-/*   Updated: 2022/04/09 14:37:12 by teambersaw       ###   ########.fr       */
+/*   Updated: 2022/04/11 17:07:16 by jrossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ typedef struct s_data
 	pthread_mutex_t	print;
 	pthread_mutex_t	sleep;
 	pthread_mutex_t	eat;
+	pthread_mutex_t	manger;
 }	t_data;
 
-int		ft_init_thread(t_args args);
-void	*philo(void *ptr);
-int	ft_check_dead(t_philo *philo, int nb_philo);
-unsigned int		ft_time(void);
+int				ft_init_thread(t_args args);
+void			*philo(void *ptr);
+int				ft_check_dead(t_philo *philo, int nb_philo);
+unsigned int	ft_time(void);
+int				ft_nb_meal(t_philo *philo);
 
 #endif

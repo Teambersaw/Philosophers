@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: teambersaw <teambersaw@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:13:24 by teambersaw        #+#    #+#             */
-/*   Updated: 2022/04/09 15:31:10 by teambersaw       ###   ########.fr       */
+/*   Updated: 2022/04/11 16:36:18 by jrossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ pthread_mutex_t	*ft_init_fork(int nb_philo)
 void	ft_init_philo(t_philo *philo, int i, t_data *data)
 {
 	philo->index = i;
-	philo->last_meal = data->day_t;
+	philo->last_meal = 0;
 	philo->data = data;
 	philo->nb_meal = 0;
 }
@@ -58,7 +58,8 @@ int	ft_init_data(t_args args, t_data *data)
 		ft_init_philo(&data->philo[i], i, data);
 	if (pthread_mutex_init(&data->sleep, NULL)
 		|| pthread_mutex_init(&data->print, NULL)
-		||pthread_mutex_init(&data->eat, NULL))
+		||pthread_mutex_init(&data->eat, NULL)  
+		||pthread_mutex_init(&data->manger, NULL))
 		return (ft_free(*data), 1);
 	return (0);
 }
@@ -76,8 +77,11 @@ int	ft_init_thread(t_args args)
 		if (pthread_create(&data.philo[i].thread, NULL, &philo, &data.philo[i]))
 			return (ft_free(data), 1);
 	}
-	//i = -1;
-	//ft_check_dead(data.philo, args.nb_philo);
+	while (1)
+	{
+		if (ft_check_dead(data.philo, args.nb_philo))
+			break ;
+	}
 	i = -1;
 	while (++i < args.nb_philo)
 		if (pthread_join(data.philo[i].thread, NULL))
