@@ -6,7 +6,7 @@
 /*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 13:59:04 by jrossett          #+#    #+#             */
-/*   Updated: 2022/04/13 17:05:25 by jrossett         ###   ########.fr       */
+/*   Updated: 2022/04/14 16:35:22 by jrossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_printf(t_philo *philo, char c)
 {
 	pthread_mutex_lock(&philo->data->death);
-	if (philo->data->stop == 0)
+	if (philo->data->stop == 0 && philo->data->dead == 0)
 	{
 		pthread_mutex_unlock(&philo->data->death);
 		pthread_mutex_lock(&philo->data->print);
@@ -39,16 +39,12 @@ void	ft_key_lock(t_philo *philo)
 	if (philo->index == philo->data->args.nb_philo - 1)
 	{
 		pthread_mutex_lock(&philo->data->fork[0]);
-		ft_printf(philo, 'f');
 		pthread_mutex_lock(&philo->data->fork[philo->index]);
-		ft_printf(philo, 'f');
 	}
 	else
 	{
 		pthread_mutex_lock(&philo->data->fork[philo->index]);
-		ft_printf(philo, 'f');
 		pthread_mutex_lock(&philo->data->fork[philo->index + 1]);
-		ft_printf(philo, 'f');
 	}
 }
 
@@ -70,9 +66,11 @@ int	ft_eat(t_philo *philo)
 {
 	ft_key_lock(philo);
 	pthread_mutex_lock(&philo->data->eat);
+	ft_printf(philo, 'f');
+	ft_printf(philo, 'f');
 	philo->last_meal = g_t(philo);
-	pthread_mutex_unlock(&philo->data->eat);
 	ft_printf(philo, 'e');
+	pthread_mutex_unlock(&philo->data->eat);
 	ft_sleep(philo->data->args.t_eat);
 	pthread_mutex_lock(&philo->data->eat);
 	philo->nb_meal += 1;
@@ -93,15 +91,16 @@ void	*philo(void *ptr)
 	while (1)
 	{
 		ft_eat(philo);
+		pthread_mutex_lock(&philo->data->eat);
 		ft_printf(philo, 's');
+		pthread_mutex_unlock(&philo->data->eat);
 		ft_sleep(philo->data->args.t_sleep);
+		pthread_mutex_lock(&philo->data->eat);
 		ft_printf(philo, 't');
+		pthread_mutex_unlock(&philo->data->eat);
 		pthread_mutex_lock(&philo->data->death);
 		if (philo->data->stop == 1)
-		{
-			pthread_mutex_unlock(&philo->data->death);
-			return (NULL);
-		}
+			return (pthread_mutex_unlock(&philo->data->death), NULL);
 		pthread_mutex_unlock(&philo->data->death);
 	}
 	return (NULL);
