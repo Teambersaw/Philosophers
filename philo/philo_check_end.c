@@ -96,3 +96,49 @@ void	*one(void	*ptr)
 	printf("%u is died\n", g_t(&philo[0]));
 	return (NULL);
 }
+
+// void	ft_putchar(char c)
+// // {
+// // 	write(1, &c, 1);
+// // }
+
+// // void	ft_putnbr_us(unsigned int n)
+// // {
+// // 	if (n > 9)
+// // 	{
+// // 		ft_putnbr_us(n / 10);
+// // 		ft_putnbr_us(n % 10);
+// // 	}	
+// // 	if (n <= 9)
+// // 	{
+// // 		ft_putchar(n + '0');
+// // 	}
+// // }
+
+// int	ft_printf(t_philo *philo, char c)
+// {
+// 	unsigned int	time;
+
+// 	pthread_mutex_lock(&philo->data->death);
+// 	if (philo->data->stop == 0 && philo->data->dead == 0)
+// 	{
+// 		pthread_mutex_unlock(&philo->data->death);
+// 		pthread_mutex_lock(&philo->data->print);
+// 		time = g_t(philo);
+// 		ft_putnbr_us(time);
+// 		write (1, " ", 1);
+// 		ft_putnbr_us((unsigned int)philo->index + 1);
+// 		if (c == 'f')
+// 			write(1, " has taken a fork\n", 18);
+// 		if (c == 'e')
+// 			write(1, " is eating\n", 11);
+// 		if (c == 's')
+// 			write(1, " is sleeping\n", 13);
+// 		if (c == 't')
+// 			write(1, " is thinking\n", 13);
+// 		pthread_mutex_unlock(&philo->data->print);
+// 	}
+// 	else
+// 		pthread_mutex_unlock(&philo->data->death);
+// 	return (0);
+// }

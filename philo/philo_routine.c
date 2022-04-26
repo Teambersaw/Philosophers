@@ -6,7 +6,7 @@
 /*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 13:59:04 by jrossett          #+#    #+#             */
-/*   Updated: 2022/04/14 16:35:22 by jrossett         ###   ########.fr       */
+/*   Updated: 2022/04/26 15:47:49 by jrossett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,16 @@ void	ft_key_lock(t_philo *philo)
 	if (philo->index == philo->data->args.nb_philo - 1)
 	{
 		pthread_mutex_lock(&philo->data->fork[0]);
+		ft_printf(philo, 'f');
 		pthread_mutex_lock(&philo->data->fork[philo->index]);
+		ft_printf(philo, 'f');
 	}
 	else
 	{
 		pthread_mutex_lock(&philo->data->fork[philo->index]);
+		ft_printf(philo, 'f');
 		pthread_mutex_lock(&philo->data->fork[philo->index + 1]);
+		ft_printf(philo, 'f');
 	}
 }
 
@@ -66,8 +70,6 @@ int	ft_eat(t_philo *philo)
 {
 	ft_key_lock(philo);
 	pthread_mutex_lock(&philo->data->eat);
-	ft_printf(philo, 'f');
-	ft_printf(philo, 'f');
 	philo->last_meal = g_t(philo);
 	ft_printf(philo, 'e');
 	pthread_mutex_unlock(&philo->data->eat);
@@ -98,10 +100,13 @@ void	*philo(void *ptr)
 		pthread_mutex_lock(&philo->data->eat);
 		ft_printf(philo, 't');
 		pthread_mutex_unlock(&philo->data->eat);
+		//if (philo->index % 2 != 0)
 		pthread_mutex_lock(&philo->data->death);
 		if (philo->data->stop == 1)
 			return (pthread_mutex_unlock(&philo->data->death), NULL);
 		pthread_mutex_unlock(&philo->data->death);
+		usleep(((philo->data->args.t_die - (philo->data->args.t_eat \
+			+ philo->data->args.t_sleep)) / 2) * 1000);
 	}
 	return (NULL);
 }
