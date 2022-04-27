@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_check_end.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: teambersaw <teambersaw@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 11:58:40 by jrossett          #+#    #+#             */
-/*   Updated: 2022/04/14 12:10:26 by jrossett         ###   ########.fr       */
+/*   Updated: 2022/04/27 22:25:02 by teambersaw       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_dead_check(t_philo *philo, int i)
 int	ft_check_dead(t_philo *philo, int nb_philo)
 {
 	int	i;
-
+	usleep(100);
 	if (ft_nb_meal(philo))
 	{
 		pthread_mutex_lock(&philo->data->death);

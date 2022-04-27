@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jrossett <jrossett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: teambersaw <teambersaw@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 18:00:15 by teambersaw        #+#    #+#             */
-/*   Updated: 2022/04/13 15:59:24 by jrossett         ###   ########.fr       */
+/*   Updated: 2022/04/27 22:43:45 by teambersaw       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int				ft_nb_meal(t_philo *philo);
 int				ft_check_dead(t_philo *philo, int nb_philo);
 unsigned int	ft_time(void);
 unsigned int	g_t(t_philo *philo);
-int				ft_printf(t_philo *philo, char c);
+int				ft_printf(t_philo *philo, char *str);
 void			ft_sleep(unsigned int sleep);
 int				ft_destruct(t_data *data);
 int				ft_init_data(t_args args, t_data *data);
