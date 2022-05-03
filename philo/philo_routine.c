@@ -6,7 +6,7 @@
 /*   By: teambersaw <teambersaw@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 13:59:04 by jrossett          #+#    #+#             */
-/*   Updated: 2022/04/27 22:43:28 by teambersaw       ###   ########.fr       */
+/*   Updated: 2022/05/03 15:08:07 by teambersaw       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,24 @@ void	ft_key_lock(t_philo *philo)
 	if (philo->index == philo->data->args.nb_philo - 1)
 	{
 		pthread_mutex_lock(&philo->data->fork[0]);
+		pthread_mutex_lock(&philo->data->eat);
 		ft_printf(philo, "has taken a fork");
+		pthread_mutex_unlock(&philo->data->eat);
 		pthread_mutex_lock(&philo->data->fork[philo->index]);
+		pthread_mutex_lock(&philo->data->eat);
 		ft_printf(philo, "has taken a fork");
+		pthread_mutex_unlock(&philo->data->eat);
 	}
 	else
 	{
 		pthread_mutex_lock(&philo->data->fork[philo->index]);
+		pthread_mutex_lock(&philo->data->eat);
 		ft_printf(philo, "has taken a fork");
+		pthread_mutex_unlock(&philo->data->eat);
 		pthread_mutex_lock(&philo->data->fork[philo->index + 1]);
+		pthread_mutex_lock(&philo->data->eat);
 		ft_printf(philo, "has taken a fork");
+		pthread_mutex_unlock(&philo->data->eat);
 	}
 }
 
